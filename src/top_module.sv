@@ -16,10 +16,8 @@ module present_crypto_top (
   logic [63:0] connect_data_to_core;
   logic [79:0] connect_key_to_core;
   logic        connect_start;
-  
   logic [63:0] connect_data_from_core;
   logic        connect_ready;
-
   // Фиксируем готовность шины APB
   assign PREADY = 1'b1;
 
@@ -43,14 +41,14 @@ module present_crypto_top (
   );
 
   // 3. Подключение криптоядра
-  present_core crypto_core_inst (
+  crypto_core crypto_core_inst (
       .clk        (clk),
-      .rst_n      (rst_n),
-      .core_data_in  (connect_data_to_core),
-      .core_key_in   (connect_key_to_core),
-      .core_start    (connect_start),
-      .core_data_out (connect_data_from_core),
-      .core_ready    (connect_ready)
+      .rst      (rst_n),
+      .valid_in    (connect_start),
+      .data_in  (connect_data_to_core),
+      .key_in   (connect_key_to_core),
+      .data_out (connect_data_from_core),
+      .ready_out    (connect_ready)
   );
 
 endmodule
