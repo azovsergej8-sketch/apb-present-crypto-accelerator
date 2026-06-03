@@ -39,7 +39,7 @@ module apb_slave_interface(
   typedef enum logic[7:0]{DATA_LO = 8'h00, DATA_HI = 8'h01, KEY_LO = 8'h02, KEY_MI = 8'h03, KEY_HI = 8'h04, CRYPTO_DATA_LO = 8'h05, CRYPTO_DATA_HI = 8'h06} mem_t;
   mem_t addr_map;
   always_comb begin
-    addr_map = addr'(PADDR);
+    addr_map = mem_t'(addr);
   end
   
   //FSM
