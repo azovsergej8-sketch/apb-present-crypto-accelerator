@@ -1,5 +1,5 @@
 class cache_driver;
-  mailbox #(cache_transaction) tr_fifo;
+  mailbox #(crypto_transaction) tr_fifo;
   
   function new( mailbox #(cache_transaction) addr_fifo);
     this.tr_fifo = addr_fifo;
