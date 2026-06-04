@@ -1,9 +1,10 @@
 class crypto_transaction;
   rand logic[31:0] data;
   rand logic[7:0] addr;
-  logic[7:0] all_addr[] = {8'h00, 8'h01, 8'h02, 8'h03, 8'h04, 8'h05, 8'h06};
-  logic[7:0] avalaible_addr[$];
-
+  static const logic[7:0] all_addr[] = {8'h00, 8'h01, 8'h02, 8'h03, 8'h04, 8'h05, 8'h06};
+  static logic[7:0] avalaible_addr[$];
+  
+  
   function new();
     avalaible_addr = all_addr;
   endfunction
