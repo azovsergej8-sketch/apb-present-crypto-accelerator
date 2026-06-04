@@ -12,14 +12,12 @@ module tb_top;
   end
   
   core_intf intermediate_core_io();
-  memory_intf intermediate_mem_io();
-  mailbox #(cache_transaction) addr_fifo;
+  mailbox #(crypto_transaction) addr_fifo;
   
   top_module dut(
-    .clk                   (clk),
-    .rst                   (rst),
-    .intermediate_core_io  (intermediate_core_io),
-    .intermediate_mem_io   (intermediate_mem_io)
+    .clk     (clk),
+    .rst_n   (rst),
+    .cr_inf  (intermediate_core_io)
   );
 
   initial begin
