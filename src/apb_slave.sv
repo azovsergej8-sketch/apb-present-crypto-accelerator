@@ -1,9 +1,9 @@
 module apb_slave(
+  input wire clk, rst, valid_in,
   //Интерфейс связи с процессором
-  core_intf.apb_slave core_inf;
-
+  core_intf.apb_slave core_inf,
   //Интерфейс связи с криптоядром
-  crypto_intf.apb_slave crypto_inf;
+  crypto_intf.apb_slave crypto_inf
 );
   //Данные к криптоядру
   logic[31:0] data_lo, data_hi;
