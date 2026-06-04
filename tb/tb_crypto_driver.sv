@@ -14,10 +14,10 @@ class crypto_driver;
       end
       @(clk_e);
       if(cr_intf.ready) begin
-        cr_intf.core_addr <= #1 tr.addr;
-        cr_intf.sel <= #1 1;
-        cr_intf.enable <= #1 1;
-        cr_intf.write <= #1 1;
+        cr_intf.core_addr <= tr.addr;
+        cr_intf.sel <= 1;
+        cr_intf.enable <= 1;
+        cr_intf.write <= 1;
         tr_fifo.put(tr);
         tr = null;
       end else begin
