@@ -46,7 +46,7 @@ module crypto_core(
   //FSM
   always@(posedge clk or negedge rst) begin
     if(!rst) begin
-      state_data <= 0; state_key <= 0; count <= 0;
+      state_data <= 0; state_key <= 0; count <= 1;
       cr_inf.cr_ready <= 1;
     end else begin
       case(state)
