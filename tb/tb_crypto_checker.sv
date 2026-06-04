@@ -1,4 +1,4 @@
-class cache_checker;
+class crypto_checker;
   mailbox #(crypto_transaction) addr_fifo;
   event clk_ev;
   
