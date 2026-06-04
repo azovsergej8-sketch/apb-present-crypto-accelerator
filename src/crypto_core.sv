@@ -1,9 +1,6 @@
 module crypto_core(
-  input wire clk, rst, valid_in,
-  input wire[63:0] data_in, 
-  input wire[79:0] key_in,
-  output reg[63:0] data_out,
-  output reg ready_out
+  input wire clk, rst,
+  crypto_intf.crypto_core cr_inf
 );
   //Данные для состояния
   reg[63:0] state_data; //Внешние данные
@@ -50,14 +47,15 @@ module crypto_core(
   always@(posedge clk or negedge rst) begin
     if(!rst) begin
       state_data <= 0; state_key <= 0; count <= 0;
+      cr_inf.cr_ready <= 1;
     end else begin
       case(state)
         IDLE: begin
-          if(valid_in) begin
-            state_data <= data_in; state_key <= key_in;
+          if(cr_inf.cr_start) begin
+            state_data <= cr_inf.cr_data; state_key <= cr_inf.cr_key;
             state <= WORK;
           end
-          ready_out <= 0;
+          cr_inf.cr_ready <= 0;
         end
         WORK: begin
           if(count < 32) begin
@@ -71,8 +69,8 @@ module crypto_core(
           end
         end
         DONE: begin
-          data_out <= state_data;
-          ready_out <= 1;
+          cr_inf.cr_wdata <= state_data;
+          cr_inf.cr_ready <= 1;
           state <= IDLE;
         end
       endcase
